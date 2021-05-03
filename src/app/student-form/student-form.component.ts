@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../services/student.service';
 
 @Component({
@@ -9,9 +9,11 @@ import { StudentService } from '../services/student.service';
   styleUrls: ['./student-form.component.scss']
 })
 export class StudentFormComponent implements OnInit {
+  id: string;
+  isAdd: boolean;
   studentForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private studentService: StudentService, private route: Router) { }
+  constructor(private fb: FormBuilder, private studentService: StudentService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.submitForm();
@@ -19,6 +21,9 @@ export class StudentFormComponent implements OnInit {
 
   // submit form
   submitForm() {
+    this.id = this.route.snapshot.params['id']
+    this.isAdd = !this.id;
+
     this.studentForm = this.fb.group({
       title: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -33,21 +38,27 @@ export class StudentFormComponent implements OnInit {
       promotion: ['', Validators.required],
       plannedCareer: ['', Validators.required],
       preferedColor: ['', Validators.required],
-      state: ['', Validators.required],
+      state: [''],
       city: ['', Validators.required],
       country: ['', Validators.required],
       company: ['', Validators.required],
     })
+    if(!this.isAdd) {
+      this.studentService.getStudent(+this.id).subscribe(data => this.studentForm.patchValue(data))
+    }
   }
 
   // save
   saveStudent(event: any) {
     event.preventDefault();
+    const student = this.studentForm.value;
     if(this.studentForm.valid) {
-      console.log('hehe');
-      this.studentService.createStudent(this.studentForm.value).subscribe(data => {
-        this.route.navigate(["students"]);
-      });
+      if(this.isAdd) {
+        this.studentService.createStudent(student).subscribe();
+      } else {
+        this.studentService.updateStudent(+this.id, student).subscribe();
+      }
+      this.router.navigate(["students"]);
     }
   }
 

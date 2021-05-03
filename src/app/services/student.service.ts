@@ -28,22 +28,34 @@ export class StudentService {
       )
   }
 
+  // get by id
+  getStudent(id: number) {
+    return this.http.get(`${environment.baseUrl}/${id}`, {
+      headers: { 'Accept': 'application/json' }
+    })
+      .pipe(
+        map(data => data)
+      );
+  }
+
   // create
   createStudent(student: Student) {
     return this.http.post(environment.baseUrl, student).pipe(
       map(data => data)
-    )
+    );
   }
 
   // update
-  updateStudent() {
-
+  updateStudent(id: number, student: Student) {
+    return this.http.put(`${environment.baseUrl}/${id}`, student).pipe(
+      map(data => data)
+    );
   }
 
   // delete
   deleteStudent(id: number) {
     return this.http.delete(`${environment.baseUrl}/${id}`).pipe(
       map(data => data)
-    )
+    );
   }
 }
