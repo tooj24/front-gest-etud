@@ -5,8 +5,13 @@
 </div>
 
 <div class="container" style="margin-bottom: 50px">
+  <mat-form-field>
+    <input matInput type="search" (keyup)="doFilter($event)" placeholder="Search">
+  </mat-form-field>
+  <button style="float: right" mat-flat-button color="primary" (click)="exporter.exportTable('csv')">CSV</button>
+
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="studentData" matSort (matSortChange)="customSort($event)">
+    <table mat-table [dataSource]="studentData" matSort (matSortChange)="customSort($event)" matTableExporter #exporter="matTableExporter">
 
       <!-- Last name -->
       <ng-container matColumnDef="lastName">
@@ -72,7 +77,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[10, 20, 50]" [length]="count" [pageSize]="itemsPerPage" (page)="handlePage($event)" showFirstLastButtons>
+    <mat-paginator [pageSizeOptions]="[10, 20, 50]" [length]="count" [pageSize]="itemsPerPage"
+      (page)="handlePage($event)" showFirstLastButtons>
     </mat-paginator>
   </div>
 </div>

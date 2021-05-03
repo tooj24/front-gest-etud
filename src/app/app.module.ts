@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StudentShowComponent } from './student-show/student-show.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { FormatKey } from './pipes/formatKey';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FormatKey } from './pipes/formatKey';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableExporterModule,
   ],
   providers: [{
     provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {

@@ -28,6 +28,9 @@ export class StudentListComponent implements OnInit {
   dir: string;
   @ViewChild(MatSort) sort: MatSort;
 
+  // search
+  str: string = ''
+
   constructor(private studentService: StudentService, private dialog: MatDialog) {
     this.getStudents()
   }
@@ -38,7 +41,7 @@ export class StudentListComponent implements OnInit {
 
   // get students list
   getStudents() {
-    this.studentService.getAllStudents(this.page, this.itemsPerPage, '', this.col, this.dir).subscribe(data => {
+    this.studentService.getAllStudents(this.page, this.itemsPerPage, this.str, this.col, this.dir).subscribe(data => {
       this.studentData = data['hydra:member'];
       this.count = data['hydra:totalItems'];
     })
@@ -71,6 +74,12 @@ export class StudentListComponent implements OnInit {
         this.getStudents();
       });
     }
+  }
+
+  // filter
+  doFilter(event: any) {
+    this.str = event.target.value;
+    this.getStudents()
   }
 
 }
