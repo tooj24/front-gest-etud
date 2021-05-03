@@ -41,7 +41,9 @@ export class StudentService {
   }
 
   // delete
-  deleteStudent() {
-
+  deleteStudent(id: number) {
+    return this.http.delete(`${environment.baseUrl}/${id}`).pipe(
+      map(data => data)
+    )
   }
 }

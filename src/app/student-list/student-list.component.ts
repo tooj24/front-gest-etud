@@ -64,4 +64,13 @@ export class StudentListComponent implements OnInit {
     this.dialog.open(StudentShowComponent, { data: student });
   }
 
+  // delete student
+  deleteStudent(id: number) {
+    if(window.confirm('Are you sure')) {
+      this.studentService.deleteStudent(id).subscribe(() => {
+        this.getStudents();
+      });
+    }
+  }
+
 }
