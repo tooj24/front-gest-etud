@@ -1,9 +1,11 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Student } from '../models/student';
 import { StudentService } from '../services/student.service';
+import { StudentShowComponent } from '../student-show/student-show.component';
 
 @Component({
   selector: 'app-student-list',
@@ -26,7 +28,7 @@ export class StudentListComponent implements OnInit {
   dir: string;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private studentService: StudentService) {
+  constructor(private studentService: StudentService, private dialog: MatDialog) {
     this.getStudents()
   }
 
@@ -55,6 +57,11 @@ export class StudentListComponent implements OnInit {
     this.col = event.active;
     this.dir = event.direction;
     this.getStudents();
+  }
+
+  // show student
+  details(student: Student) {
+    this.dialog.open(StudentShowComponent, { data: student });
   }
 
 }

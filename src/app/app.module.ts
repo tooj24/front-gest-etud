@@ -9,22 +9,32 @@ import { MaterialModule } from './material.module';
 import { StudentListComponent } from './student-list/student-list.component';
 import { StudentFormComponent } from './student-form/student-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StudentShowComponent } from './student-show/student-show.component';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { FormatKey } from './pipes/formatKey';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentListComponent,
-    StudentFormComponent
+    StudentFormComponent,
+    StudentShowComponent,
+    FormatKey
   ],
   imports: [
-    AppRoutingModule,
+  AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {
+      width: '700px',
+      hasBackdrop: true
+    }
+  }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

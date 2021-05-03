@@ -1,0 +1,23 @@
+<div class="title-group">
+  <h2 class="border-bottom" mat-dialog-title>Student details</h2>
+  <mat-divider fxFlex="1 0"></mat-divider>
+</div>
+
+<div class="inner-wrapper" style="padding: 15px 10px !important;">
+  <mat-card>
+    <div *ngFor="let name of gridLeft" style="display: flex;">
+      <p style="width: 40%; font-weight: 500">{{name|formatKey}}</p>
+      <p style="width: 60%;">: {{name !== 'birth' ? student[name] : student[name]|date: 'd/M/Y'}}</p>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <div *ngFor="let name of gridRight" style="display: flex;">
+      <p style="width: 40%; font-weight: 500">{{name|formatKey}}</p>
+      <p style="width: 60%;">: {{student[name]}}</p>
+    </div>
+  </mat-card>
+  <div mat-dialog-actions>
+    <button type="reset" color="primary" mat-flat-button mat-dialog-close>OK</button>
+  </div>
+</div>
