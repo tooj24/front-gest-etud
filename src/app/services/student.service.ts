@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { Student } from '../models/student';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,10 @@ export class StudentService {
   }
 
   // create
-  createStudent() {
-
+  createStudent(student: Student) {
+    return this.http.post(environment.baseUrl, student).pipe(
+      map(data => data)
+    )
   }
 
   // update

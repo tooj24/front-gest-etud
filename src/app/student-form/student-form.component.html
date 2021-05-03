@@ -1,0 +1,172 @@
+<!-- Title group  -->
+<div class="title-group">
+  <h1 class="mat-h1">Add Student</h1>
+  <mat-divider fxFlex="1 0"></mat-divider>
+</div>
+
+<!-- Form -->
+<div class="inner-wrapper">
+  <form [formGroup]="studentForm" (ngSubmit)="saveStudent($event)" #resetStudentForm="ngForm" novalidate>
+    <!-- Left block -->
+    <mat-card>
+      <div class="controlers-wrapper">
+
+        <!-- Title -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Title" formControlName="title">
+          <mat-error *ngIf="handleError('title', 'required')">
+            You must provide a <strong>title</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Last name -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Last name" formControlName="lastName">
+          <mat-error *ngIf="handleError('lastName', 'required')">
+            You must provide a <strong>last name</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- First name -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="First name" formControlName="firstName">
+          <mat-error *ngIf="handleError('firstName', 'required')">
+            You must provide a <strong>first name</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Date of birth -->
+        <mat-form-field>
+          <input matInput readonly [matDatepicker]="picker" placeholder="Date of birth" formControlName="birth"
+            (dateChange)="formatDate($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="handleError('birth', 'required')">
+            Date of birth is required
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Email -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="handleError('email', 'required')">
+            You must provide an <strong> email</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Linkedin -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Linkedin" formControlName="linkedin">
+          <mat-error *ngIf="handleError('linkedin', 'required')">
+            You must provide an <strong> linkedin</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Street name -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Street name" formControlName="streetName">
+          <mat-error *ngIf="handleError('streetName', 'required')">
+            You must provide a <strong> street name</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Street Address -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Street Address" formControlName="streetAddress">
+          <mat-error *ngIf="handleError('streetAddress', 'required')">
+            You must provide a <strong> streetAddress</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Gender -->
+        <div class="misc-bottom-padding">
+          <mat-label>Gender:</mat-label>
+          <mat-radio-group aria-label="Select an option" formControlName="gender">
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+      </div>
+    </mat-card>
+
+    <!-- Right block -->
+    <mat-card>
+      <div class="controlers-wrapper">
+
+        <!-- Prefered color -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Prefered color" formControlName="preferedColor">
+          <mat-error *ngIf="handleError('preferedColor', 'required')">
+            You must provide a <strong> prefered color</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Planned career -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Planned career" formControlName="plannedCareer">
+          <mat-error *ngIf="handleError('plannedCareer', 'required')">
+            You must provide a <strong> planned career</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- University -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="University" formControlName="university">
+          <mat-error *ngIf="handleError('university', 'required')">
+            You must provide a <strong> university</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Promotion -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Promotion" formControlName="promotion">
+          <mat-error *ngIf="handleError('promotion', 'required')">
+            You must provide a <strong> promotion</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- State -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="State" formControlName="state">
+          <mat-error *ngIf="handleError('state', 'required')">
+            You must provide a <strong> state</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- City -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="City" formControlName="city">
+          <mat-error *ngIf="handleError('city', 'required')">
+            You must provide a <strong> city</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Country -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Country" formControlName="country">
+          <mat-error *ngIf="handleError('country', 'required')">
+            You must provide an <strong> country</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Company -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Company" formControlName="company">
+          <mat-error *ngIf="handleError('company', 'required')">
+            You must provide a <strong> company</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card>
+
+    <!-- Submit & Reset -->
+    <mat-card>
+      <div class="full-wrapper button-wrapper">
+        <div class="button-wrapper">
+          <button mat-flat-button color="warn">Submit</button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</div>
